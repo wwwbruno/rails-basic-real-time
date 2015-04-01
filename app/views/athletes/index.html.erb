@@ -1,6 +1,6 @@
 <h1>Listing athletes</h1>
 
-<table>
+<table ng-app="disvolvi">
   <thead>
     <tr>
       <th>Name</th>
@@ -10,17 +10,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @athletes.each do |athlete| %>
-      <tr>
-        <td><%= athlete.name %></td>
-        <td><%= athlete.email %></td>
-        <td><%= athlete.category %></td>
-        <td><%= link_to 'Show', athlete %></td>
-        <td><%= link_to 'Edit', edit_athlete_path(athlete) %></td>
-        <td><%= link_to 'Destroy', athlete, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <tbody ng-controller="SportsController as sport">
+      <tr ng-repeat="athlete in athletes">
+        <td>{{ athlete.name }}</td>
+        <td>{{ athlete.email }}</td>
+        <td>{{ athlete.category }}</td>
       </tr>
-    <% end %>
   </tbody>
 </table>
 
