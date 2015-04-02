@@ -20,12 +20,14 @@ io.sockets.on('connection', function (socket) {
 
   // subscribe to redis
   var subscribe = redis.createClient();
-  subscribe.subscribe('athletes');
+  subscribe.subscribe('insertAthlete');
+  subscribe.subscribe('updateAthlete');
+  subscribe.subscribe('destroyAthlete');
 
   // relay redis messages to connected socket
   subscribe.on("message", function(channel, message) {
     console.log("from rails to subscriber:", channel, message);
-    socket.emit('message', message)
+    socket.emit('message', message, channel)
   });
 
   // unsubscribe from redis if session disconnects

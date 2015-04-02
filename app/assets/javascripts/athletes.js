@@ -34,11 +34,29 @@
 	        $scope.athletes = data;
 	    })
 
-	    socket.emit('message')
+		socket.on('message', function (data, channel) {
 
-		socket.on('message', function (data) {
 			data = JSON.parse(data)
-			$scope.athletes.push(data)
+			console.log(data);
+			
+			// Insert athlete
+			if (channel == "insertAthlete") {
+				$scope.athletes.push(data)
+			}
+
+			// Update athlete
+			else if (channel == "updateAthlete") {
+				jQuery.each($scope.athletes, function( i, obj ) {
+					if (data.id == obj.id) $scope.athletes[i] = data;
+				})
+			}
+
+			// Remove athlete
+			else if (channel == "destroyAthlete") {
+				$scope.athletes = jQuery.grep($scope.athletes, function( obj, i ) {
+					return (data.id != obj.id);
+				});
+			}
 		})
 	}])
 })()

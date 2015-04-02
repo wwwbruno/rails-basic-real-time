@@ -28,7 +28,6 @@ class AthletesController < ApplicationController
 
     respond_to do |format|
       if @athlete.save
-        $redis.publish('athletes', @athlete.to_json)
         format.html { redirect_to @athlete, notice: 'Athlete was successfully created.' }
         format.json { render :show, status: :created, location: @athlete }
       else
