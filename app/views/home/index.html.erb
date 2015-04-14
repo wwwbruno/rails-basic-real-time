@@ -1,0 +1,21 @@
+<h1>Listing athletes</h1>
+
+<table ng-app="disvolvi">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+
+  <tbody ng-controller="SportsController as sport">
+      <tr ng-repeat="athlete in athletes">
+        <td>{{ athlete.name }}</td>
+        <td>{{ athlete.email }}</td>
+        <td>{{ athlete.category }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Athletes scaffold', athletes_path %>
